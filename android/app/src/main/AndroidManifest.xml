@@ -3,12 +3,17 @@
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
     <uses-permission android:name="android.permission.CAMERA"/>
+    
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true" />
    <application
-        android:label="nfc"
+        android:label="card Number Reader"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,8 +1,10 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, avoid_print, unused_local_variable, prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, import_of_legacy_library_into_null_safe, unnecessary_new
+// ignore_for_file: prefer_const_literals_to_create_immutables, avoid_print, unused_local_variable, prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, import_of_legacy_library_into_null_safe, unnecessary_new, prefer_interpolation_to_compose_strings
 import 'package:flutter/material.dart';
 import 'package:credit_card_scanner/credit_card_scanner.dart';
 import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
+
+import 'write_excel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -116,6 +118,21 @@ class _MyHomePageState extends State<MyHomePage> {
                             },
                             child: Icon(Icons.cut_sharp,
                                 color: Colors.green, size: 27)),
+                        SizedBox(height: 10),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          WriteExecl(cardNumbers)));
+                              Toast.show("Save to Excel",
+                                  duration: Toast.lengthShort,
+                                  gravity: Toast.center,
+                                  backgroundColor: Colors.green);
+                            },
+                            child: Icon(Icons.save_alt_rounded,
+                                color: Colors.green, size: 27)),
                       ],
                     ),
                     border: InputBorder.none),
@@ -133,6 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
           var cardnumName = "";
           cardnumName =
               '${cardDetails!.cardNumber}\n${cardDetails.cardHolderName}';
+
           setState(() {
             title = cardnumName;
             cardNumbers.add(cardDetails.cardNumber.toString());
