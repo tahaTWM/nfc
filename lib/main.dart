@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, avoid_print, unused_local_variable, prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, import_of_legacy_library_into_null_safe, unnecessary_new, prefer_interpolation_to_compose_strings
+// ignore_for_file: prefer_const_literals_to_create_immutables, avoid_print, unused_local_variable, prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, import_of_legacy_library_into_null_safe, unnecessary_new, prefer_interpolation_to_compose_strings, avoid_function_literals_in_foreach_calls
 import 'package:flutter/material.dart';
 import 'package:credit_card_scanner/credit_card_scanner.dart';
 import 'package:flutter/services.dart';
@@ -121,11 +121,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         SizedBox(height: 10),
                         GestureDetector(
                             onTap: () {
+                              var insideList;
+                              List all = [];
+                              cardNumbers.forEach((element) {
+                                all.add([element, true]);
+                              });
+                              print(all);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          WriteExecl(cardNumbers)));
+                                      builder: (context) => WriteExecl(all)));
                               Toast.show("Save to Excel",
                                   duration: Toast.lengthShort,
                                   gravity: Toast.center,
@@ -147,6 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           var cardDetails = await CardScanner.scanCard();
+
           var cardnumName = "";
           cardnumName =
               '${cardDetails!.cardNumber}\n${cardDetails.cardHolderName}';
